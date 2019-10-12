@@ -1,13 +1,15 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { userSelector } from '../redux/selectors'
+
+import {
+  GetUserList
+} from '../redux/actions'
 
 class Home extends PureComponent {
 
-  componentDidMount() {
-    this.getUserList()
-  }
-
-  getUserList = () => {
-    
+  componentWillMount() {
+    this.props.dispatch(GetUserList())
   }
 
   render() {
@@ -18,4 +20,4 @@ class Home extends PureComponent {
   }
 }
 
-export default Home
+export default connect(userSelector)(Home)

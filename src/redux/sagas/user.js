@@ -1,9 +1,10 @@
-'use strict'
+import { put, takeLatest } from 'redux-saga/effects'
 
 function *GetUserList() {
-  console.log('Saga Here')
+  console.log('wew')
+  yield put({ type: 'GET_USER_LIST', payload: [{ name: 'Jero', email: 'jero@gmail.com' }] })
 }
 
 export default function *() {
-  yield takeLatest('GET_USER_LIST', GetUserList)
+  yield takeLatest('GET_USER_LIST_REQUESTED', GetUserList)
 }

@@ -12,6 +12,7 @@ const actionHandlers = {
 }
 
 export default (state = INITIAL_STATE, action) => {
+  console.log('reducer', action)
   if (actionHandlers.hasOwnProperty(action.type)) {
     return actionHandlers[action.type](state, action)
   }
