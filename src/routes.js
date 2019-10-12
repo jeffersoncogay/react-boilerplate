@@ -6,7 +6,11 @@ class AppRoot extends PureComponent {
   history = () => {
     let { history, history: { push }, location: { search }} = this.props
     history.push = args => {
-      push({ pathname: args, search })
+      if (typeof args === 'object') {
+        push({ ...args, search })
+      } else {
+        push({ pathname: args, search })
+      }
     }
 
     return history
@@ -20,7 +24,7 @@ class AppRoot extends PureComponent {
 
 const Home = Loadable({
   loader: ()=> import('./containers/Home'),
-  loading: () => (<div>LOADING PA MORE...</div>)
+  loading: () => (<div>LOADING ....</div>)
 })
 
 export default [
@@ -29,7 +33,7 @@ export default [
     routes: [
       {
         path: '/home',
-        component: import('./containers/Home'),
+        component: Home,
         exact: true
       }
     ]
