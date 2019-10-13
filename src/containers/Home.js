@@ -1,6 +1,13 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { userSelector } from '../redux/selectors'
+import {
+  Avatar,
+  FontIcon,
+  List,
+  ListItem,
+  Button,
+} from 'react-md';
 
 import {
   GetUserList
@@ -14,13 +21,32 @@ class Home extends PureComponent {
 
   render() {
     const { list } = this.props.user
+    console.log('zzz', list)
     return (
       <div>
-        <h2>You Are Home!!!!</h2>
+        <div className='md-cell md-grid md-cell--12'>
+        <h2 className='md-cell md-cell--12'>Welcome People!</h2>
         {
           list && list.length
-          && list.map((e, i) => (<h3 key={i.toString()}>{`hahaasdfasdha ${e.name}`}</h3>))
+          && list.map((e, i) => (
+            <div key={i.toString()} className='md-cell md-cell--4'>
+              <List className="md-paper md-paper--1">
+                <ListItem primaryText={`${e.name}`} />
+                <ListItem
+                  leftAvatar={<Avatar icon={<FontIcon>work</FontIcon>} />}
+                  primaryText="Company"
+                  secondaryText={e.company.name}
+                />
+                <ListItem
+                  leftAvatar={<Avatar icon={<FontIcon>public</FontIcon>} />}
+                  primaryText="Website"
+                  secondaryText={e.website}
+                />
+              </List>
+            </div>
+          ))
         }
+        </div>
       </div>
     )
   }

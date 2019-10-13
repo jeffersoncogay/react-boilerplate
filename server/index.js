@@ -19,6 +19,7 @@ app.use(webpackHotMiddleware(webpackCompiler))
 app.get('/api', (req, res) => {
   res.send(mockResponse)
 })
+
 app.get('*', (req, res) => {
   res.sendFile(HTML_FILE)
 })

@@ -12,7 +12,7 @@ class AppRoot extends PureComponent {
         push({ pathname: args, search })
       }
     }
-
+    
     return history
   }
 
