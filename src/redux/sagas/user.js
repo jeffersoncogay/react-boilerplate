@@ -2,7 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects'
 
 function *GetUserList() {
   console.log('wew')
-  yield put({ type: 'GET_USER_LIST', payload: [{ name: 'Jero', email: 'jero@gmail.com' }] })
+  yield put({ type: 'GET_USER_LIST', payload: [{ name: 'Jerosdfsdf', email: 'jero@gmail.com' }] })
 }
 
 export default function *() {

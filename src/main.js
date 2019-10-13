@@ -1,7 +1,7 @@
 import React from 'react'
+import { hot } from 'react-hot-loader'
 import { render } from 'react-dom'
-import BrowserRouter from 'react-router-dom/BrowserRouter'
-import { renderToString } from 'react-dom/server'
+import { BrowserRouter } from 'react-router-dom'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { Provider } from 'react-redux'
@@ -29,5 +29,9 @@ const AppRouter = () => {
 }
 
 render(<AppRouter />, document.getElementById('root'))
+
+if (module.hot) {
+  module.hot.accept()
+}
 
 

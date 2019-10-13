@@ -8,14 +8,20 @@ import {
 
 class Home extends PureComponent {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.dispatch(GetUserList())
   }
 
   render() {
-    console.log('HOME ===> ', this.props)
+    const { list } = this.props.user
     return (
-      <div>You Are Home!</div>
+      <div>
+        <h2>You Are Home!!!!</h2>
+        {
+          list && list.length
+          && list.map((e, i) => (<h3 key={i.toString()}>{`hahaasdfasdha ${e.name}`}</h3>))
+        }
+      </div>
     )
   }
 }
