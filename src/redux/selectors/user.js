@@ -2,9 +2,11 @@ import { createSelector } from 'reselect'
 
 export default createSelector(
   state => state.user,
-  (user) => {
+  state => state.common,
+  (user, common) => {
     return {
-      user: { ...user }
+      user: { ...user },
+      ...common
     }
   }
 )

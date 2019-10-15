@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './style.scss'
+import './style.css'
 const Index = () => {
   return <div>Welcome to React!</div>
 }

@@ -26,7 +26,8 @@
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
     "reselect": "^4.0.0",
-    "uuidv4": "^5.0.1"
+    "uuidv4": "^5.0.1",
+    "validator": "^11.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
