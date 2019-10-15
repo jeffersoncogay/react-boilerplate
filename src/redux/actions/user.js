@@ -4,6 +4,13 @@ export function GetUserList() {
   }
 }
 
+export function CreateUser(payload) {
+  return {
+    type: 'CREATE_USER_REQUESTED',
+    payload
+  }
+}
+
 export function UpdateUser(payload) {
   return {
     type: 'UPDATE_USER_REQUESTED',

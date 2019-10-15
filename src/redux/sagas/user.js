@@ -1,5 +1,7 @@
 import { put, takeLatest, call, all, select } from 'redux-saga/effects'
 import { axios } from '../../utils'
+import uuid from 'uuidv4'
+
 import {
   ShowDialog
 } from '../actions'
@@ -9,6 +11,28 @@ function *GetUserList() {
   if (result.type === 'GET_USER_LIST') {
     yield put(result)
   }
+}
+
+function *CreateUser({ payload }) {
+  const { company, ...rest } = payload
+  const { list } = yield select(state => state.user)
+
+  yield all([
+    put({
+      type: 'UPDATE_USER',
+      payload: [
+        {
+          id: uuid(),
+          company: {
+            name: company
+          },
+          ...rest
+        },
+        ...list
+      ]
+    }),
+    put(ShowDialog(false))
+  ])
 }
 
 function *UpdateUser({ payload }) {
@@ -50,6 +74,7 @@ function *DeleteUser({ payload }) {
 
 export default function *() {
   yield takeLatest('GET_USER_LIST_REQUESTED', GetUserList)
+  yield takeLatest('CREATE_USER_REQUESTED', CreateUser)
   yield takeLatest('UPDATE_USER_REQUESTED', UpdateUser)
   yield takeLatest('DELETE_USER_REQUESTED', DeleteUser)
 }

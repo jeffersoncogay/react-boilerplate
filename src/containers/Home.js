@@ -15,6 +15,7 @@ import validateInput from '../validations/user'
 
 import {
   GetUserList,
+  CreateUser,
   UpdateUser,
   DeleteUser,
   ShowDialog
@@ -62,7 +63,11 @@ class Home extends PureComponent {
     const validate = validateInput(formData)
 
     if (validate.isValid) {
-      this.props.dispatch(UpdateUser(formData))
+      if (formData.id) {
+        this.props.dispatch(UpdateUser(formData))
+      } else {
+        this.props.dispatch(CreateUser(formData))
+      }
     } else {
       this.setState({
         errors: validate.errors
@@ -100,9 +105,15 @@ class Home extends PureComponent {
     return (
       <div>
         <div className='md-cell md-grid md-cell--12'>
-        <div>
-          Welcome People!
-          <Button>Create</Button>
+        <div className='md-cell md-cell--12'>
+          <span style={{ fontSize: '30px' }}>Welcome People!</span>
+          <Button
+            raised primary iconChildren='add'
+            style={{ top: '2px', left: '10px' }}
+            onClick={() => this.handleDialog({ type: 'add' })}
+          >
+            Add User
+          </Button>
         </div>
         {
           list && list.length
@@ -143,13 +154,14 @@ class Home extends PureComponent {
         }
         </div>
         {
-          (dialog && dialog.type === 'edit') &&
+          (dialog && (['edit', 'add'].includes(dialog.type))) &&
           <UserDialog
             data={restState}
             onCloseDialog={() => this.handleDialog(false)}
             onSave={this.handleSave}
             onChange={this.handleChange}
             errors={errors}
+            title={dialog.type === 'add' ? 'Add User' : 'Edit User'}
           />
         }
         {

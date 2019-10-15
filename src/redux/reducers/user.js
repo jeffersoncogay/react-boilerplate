@@ -9,6 +9,7 @@ const actionHandlers = {
       list: action.payload
     }
   },
+
   UPDATE_USER: (state, { payload }) => {
     return {
       ...state,
