@@ -109,7 +109,7 @@ class Home extends PureComponent {
           <span style={{ fontSize: '30px' }}>Welcome People!</span>
           <Button
             raised primary iconChildren='add'
-            style={{ top: '2px', left: '10px' }}
+            style={{ left: '10px' }}
             onClick={() => this.handleDialog({ type: 'add' })}
           >
             Add User
