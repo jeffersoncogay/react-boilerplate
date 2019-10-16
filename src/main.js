@@ -30,6 +30,7 @@ const AppRouter = () => {
 
 render(<AppRouter />, document.getElementById('root'))
 
+console.log('Module is hot: ', module.hot)
 if (module.hot) {
   module.hot.accept()
 }

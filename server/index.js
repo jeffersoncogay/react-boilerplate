@@ -1,8 +1,4 @@
 const express = require('express')
-const webpack = require('webpack')
-const webpackconfig = require('../webpack.config')
-const webpackMiddleware = require('webpack-dev-middleware')
-const webpackHotMiddleware = require('webpack-hot-middleware')
 const path = require('path')
 
 const app = express()
@@ -12,9 +8,17 @@ const HTML_FILE = path.join(DIST_DIR, 'index.html')
 
 app.use(express.static(DIST_DIR))
 
-const webpackCompiler = webpack(webpackconfig)
-app.use(webpackMiddleware(webpackCompiler,{}))
-app.use(webpackHotMiddleware(webpackCompiler))
+if (process.env.NODE_ENV === 'development') {
+  const webpack = require('webpack')
+  const webpackconfig = require('../webpack.dev')
+  const webpackMiddleware = require('webpack-dev-middleware')
+  const webpackHotMiddleware = require('webpack-hot-middleware')
+  const webpackCompiler = webpack(webpackconfig)
+  app.use(webpackMiddleware(webpackCompiler,{}))
+  app.use(webpackHotMiddleware(webpackCompiler))
+}
+
+global.node_env = process.env.NODE_ENV
 
 app.get('/api', (req, res) => {
   res.send(mockResponse)
