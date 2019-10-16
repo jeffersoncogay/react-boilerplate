@@ -21,15 +21,17 @@ import {
   ShowDialog
 } from '../redux/actions'
 
+const INITIAL_STATE = {
+  id: '',
+  company: '',
+  website: '',
+  name: '',
+  errors: {}
+}
+
 class Home extends PureComponent {
 
-  state = {
-    id: '',
-    company: '',
-    website: '',
-    name: '',
-    errors: {}
-  }
+  state = INITIAL_STATE
 
   componentDidMount() {
     this.props.dispatch(GetUserList())
@@ -43,10 +45,16 @@ class Home extends PureComponent {
       rest.name = data.name
       rest.company = data.company.name
     }
-    this.setState({
+
+    let nextState = {
       ...rest,
       errors: {}
-    }, () => {
+    }
+
+    if (!show) {
+      nextState = INITIAL_STATE
+    }
+    this.setState(nextState, () => {
       this.props.dispatch(ShowDialog(show))
     })
   }
